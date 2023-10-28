@@ -2,4 +2,11 @@
     <string name="app_name">Gymtera</string>
     <string name="gymtera">GYMTERA</string>
     <string name="logo">LOGO</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="masuk">Masuk</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="deskripsi_auth">Silahkan masuk atau daftar akun terlebih dahulu</string>
+    <string name="masuk_sebagai_admin">Masuk sebagai <font color="#BFA045">admin</font></string>
+    <string name="belum_memiliki_akun_daftar">Belum memiliki akun? <font color="#BFA045">Daftar</font></string>
 </resources>

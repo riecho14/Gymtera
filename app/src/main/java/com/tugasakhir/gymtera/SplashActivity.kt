@@ -16,16 +16,14 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         Handler().postDelayed({
             val i = Intent(
-                this@SplashActivity,
-                MainActivity::class.java
+                this@SplashActivity, LoginActivity::class.java
             )
             startActivity(i)
             finish()
