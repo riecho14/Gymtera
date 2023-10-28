@@ -15,11 +15,12 @@
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <ImageView
-        android:layout_width="147dp"
-        android:layout_height="88dp"
+        android:layout_width="196dp"
+        android:layout_height="77dp"
         android:layout_below="@id/text2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="-40dp"
+        android:layout_marginTop="7dp"
         android:src="@drawable/bg_cloud_left"
         tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
 
@@ -32,20 +33,15 @@
         android:src="@drawable/bg_cloud_right"
         tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ImageView
         android:id="@+id/icLogo"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:scaleType="centerCrop"
-        app:lottie_autoPlay="true"
-        app:lottie_cacheComposition="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/login_animation"
-        tools:ignore="ImageContrastCheck">
-
-    </com.airbnb.lottie.LottieAnimationView>
+        android:src="@drawable/bg_clip_auth"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/text1"
@@ -86,6 +82,7 @@
         app:boxStrokeColor="@color/gold"
         app:cursorColor="@color/gold"
         app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/gold"
         app:hintTextColor="@color/gold">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -93,6 +90,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ft_regular"
             android:inputType="text"
+            android:textColorHighlight="@color/gold"
             tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,6 +115,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/ft_regular"
             android:inputType="textPassword"
+            android:textColorHighlight="@color/gold"
             tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </com.google.android.material.textfield.TextInputLayout>
 
