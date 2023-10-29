@@ -82,6 +82,7 @@
         app:boxStrokeColor="@color/gold"
         app:cursorColor="@color/gold"
         app:endIconMode="clear_text"
+        app:errorEnabled="false"
         app:helperTextTextColor="@color/gold"
         app:hintTextColor="@color/gold">
 
@@ -108,6 +109,7 @@
         app:boxStrokeColor="@color/gold"
         app:cursorColor="@color/gold"
         app:endIconMode="password_toggle"
+        app:errorEnabled="false"
         app:hintTextColor="@color/gold">
 
         <com.google.android.material.textfield.TextInputEditText
