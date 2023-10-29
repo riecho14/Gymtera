@@ -54,6 +54,12 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Click Listener
+        binding.bottom1.setOnClickListener {
+            val intent = Intent(this, AdminLoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.bottom2.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

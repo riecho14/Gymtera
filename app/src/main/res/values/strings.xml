@@ -14,4 +14,6 @@
     <string name="daftar">Daftar</string>
     <string name="email_error">Silahkan masukkan alamat email yang benar</string>
     <string name="password_error">Jumlah password minimal 8 karakter</string>
+    <string name="silahkan_masuk_menggunakan_akun_admin_anda">Silahkan masuk menggunakan akun admin Anda</string>
+    <string name="masuk_sebagai_pengguna">Masuk sebagai <font color="#BFA045">pengguna</font></string>
 </resources>

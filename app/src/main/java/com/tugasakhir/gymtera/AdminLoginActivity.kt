@@ -1,19 +1,19 @@
 package com.tugasakhir.gymtera
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
-import androidx.appcompat.app.AppCompatActivity
-import com.tugasakhir.gymtera.databinding.ActivityLoginBinding
+import com.tugasakhir.gymtera.databinding.ActivityAdminLoginBinding
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class AdminLoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAdminLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityAdminLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Text Watcher
@@ -55,13 +55,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Click Listener
         binding.bottom1.setOnClickListener {
-            val intent = Intent(this, AdminLoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        binding.bottom2.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
