@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <!-- Image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_auth"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <ImageView
+        android:layout_width="196dp"
+        android:layout_height="77dp"
+        android:layout_below="@id/text2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-40dp"
+        android:layout_marginTop="7dp"
+        android:src="@drawable/bg_cloud_left"
+        tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
+
+    <ImageView
+        android:layout_width="117dp"
+        android:layout_height="89dp"
+        android:layout_below="@id/text2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="-25dp"
+        android:src="@drawable/bg_cloud_right"
+        tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
+
+    <ImageView
+        android:id="@+id/icLogo"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_clip_auth"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icLogo"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/ft_semibold"
+        android:text="@string/selamat_datang"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/ft_regular"
+        android:text="@string/deskripsi_auth"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:ignore="TextContrastCheck" />
+
+    <!-- Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginRight="36dp"
+        android:hint="@string/nama_lengkap"
+        app:boxStrokeColor="@color/gold"
+        app:cursorColor="@color/gold"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/gold"
+        app:hintTextColor="@color/gold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ft_regular"
+            android:inputType="text"
+            android:textColorHighlight="@color/gold"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="36dp"
+        android:hint="@string/email"
+        app:boxStrokeColor="@color/gold"
+        app:cursorColor="@color/gold"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/gold"
+        app:hintTextColor="@color/gold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ft_regular"
+            android:inputType="text"
+            android:textColorHighlight="@color/gold"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="36dp"
+        android:hint="@string/password"
+        app:boxStrokeColor="@color/gold"
+        app:cursorColor="@color/gold"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="@color/gold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ft_regular"
+            android:inputType="textPassword"
+            android:textColorHighlight="@color/gold"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_masuk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="86dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="86dp"
+        android:backgroundTint="@color/gold"
+        android:fontFamily="@font/ft_medium"
+        android:text="@string/daftar"
+        tools:ignore="VisualLintButtonSize,TextContrastCheck">
+
+    </com.google.android.material.button.MaterialButton>
+
+    <!-- Bottom Text -->
+    <TextView
+        android:id="@+id/bottom1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom2"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/ft_regular"
+        android:text="@string/masuk_sebagai_admin"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@id/bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/ft_regular"
+        android:text="@string/sudah_memiliki_akun_masuk"
+        android:textSize="12sp" />
+
+</RelativeLayout>

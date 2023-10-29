@@ -9,4 +9,7 @@
     <string name="deskripsi_auth">Silahkan masuk atau daftar akun terlebih dahulu</string>
     <string name="masuk_sebagai_admin">Masuk sebagai <font color="#BFA045">admin</font></string>
     <string name="belum_memiliki_akun_daftar">Belum memiliki akun? <font color="#BFA045">Daftar</font></string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="sudah_memiliki_akun_masuk">Sudah memiliki akun? <font color="#BFA045">Masuk</font></string>
+    <string name="daftar">Daftar</string>
 </resources>
