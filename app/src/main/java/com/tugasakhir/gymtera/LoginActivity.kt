@@ -54,6 +54,27 @@ class LoginActivity : AppCompatActivity() {
         })
 
         // Click Listener
+        binding.btMasuk.setOnClickListener {
+            val email = binding.textEmail.editText?.text.toString()
+            val password = binding.textPassword.editText?.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                if (email.isEmpty()) {
+                    binding.textEmail.error = getString(R.string.email_error)
+                } else {
+                    binding.textEmail.isErrorEnabled = false
+                }
+
+                if (password.isEmpty()) {
+                    binding.textPassword.error = getString(R.string.password_error)
+                } else {
+                    binding.textPassword.isErrorEnabled = false
+                }
+            } else {
+                //Fungsi login
+            }
+        }
+
         binding.bottom1.setOnClickListener {
             val intent = Intent(this, AdminLoginActivity::class.java)
             startActivity(intent)

@@ -6,14 +6,15 @@
     <string name="password">Kata Sandi</string>
     <string name="masuk">Masuk</string>
     <string name="selamat_datang">Selamat Datang</string>
-    <string name="deskripsi_auth">Silahkan masuk atau daftar akun terlebih dahulu</string>
+    <string name="deskripsi_auth">Silakan masuk atau daftar akun terlebih dahulu</string>
     <string name="masuk_sebagai_admin">Masuk sebagai <font color="#BFA045">admin</font></string>
     <string name="belum_memiliki_akun_daftar">Belum memiliki akun? <font color="#BFA045">Daftar</font></string>
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="sudah_memiliki_akun_masuk">Sudah memiliki akun? <font color="#BFA045">Masuk</font></string>
     <string name="daftar">Daftar</string>
-    <string name="email_error">Silahkan masukkan alamat email yang benar</string>
+    <string name="email_error">Silakan masukkan alamat email yang benar</string>
     <string name="password_error">Jumlah password minimal 8 karakter</string>
-    <string name="silahkan_masuk_menggunakan_akun_admin_anda">Silahkan masuk menggunakan akun admin Anda</string>
+    <string name="silahkan_masuk_menggunakan_akun_admin_anda">Silakan masuk menggunakan akun admin Anda</string>
     <string name="masuk_sebagai_pengguna">Masuk sebagai <font color="#BFA045">pengguna</font></string>
+    <string name="name_error">Silakan isi nama lengkap Anda</string>
 </resources>

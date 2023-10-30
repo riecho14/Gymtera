@@ -81,6 +81,7 @@
         app:boxStrokeColor="@color/gold"
         app:cursorColor="@color/gold"
         app:endIconMode="clear_text"
+        app:errorEnabled="false"
         app:helperTextTextColor="@color/gold"
         app:hintTextColor="@color/gold">
 
@@ -148,7 +149,7 @@
 
     <!-- Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_masuk"
+        android:id="@+id/bt_daftar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textPassword"

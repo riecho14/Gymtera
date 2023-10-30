@@ -17,6 +17,20 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Text Watcher
+        binding.textName.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                binding.textName.isErrorEnabled = false
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
         binding.textEmail.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 binding.textEmail.isErrorEnabled = false
@@ -54,6 +68,34 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Click Listener
+        binding.btDaftar.setOnClickListener {
+            val name = binding.textName.editText?.text.toString()
+            val email = binding.textEmail.editText?.text.toString()
+            val password = binding.textPassword.editText?.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                if (name.isEmpty()) {
+                    binding.textName.error = getString(R.string.name_error)
+                } else {
+                    binding.textName.isErrorEnabled = false
+                }
+
+                if (email.isEmpty()) {
+                    binding.textEmail.error = getString(R.string.email_error)
+                } else {
+                    binding.textEmail.isErrorEnabled = false
+                }
+
+                if (password.isEmpty()) {
+                    binding.textPassword.error = getString(R.string.password_error)
+                } else {
+                    binding.textPassword.isErrorEnabled = false
+                }
+            } else {
+                //Fungsi register
+            }
+        }
+
         binding.bottom1.setOnClickListener {
             val intent = Intent(this, AdminLoginActivity::class.java)
             startActivity(intent)
