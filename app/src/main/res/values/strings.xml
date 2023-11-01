@@ -17,4 +17,5 @@
     <string name="silahkan_masuk_menggunakan_akun_admin_anda">Silakan masuk menggunakan akun admin Anda</string>
     <string name="masuk_sebagai_pengguna">Masuk sebagai <font color="#BFA045">pengguna</font></string>
     <string name="name_error">Silakan isi nama lengkap Anda</string>
+    <string name="ref_url">https://gymtera-94be1-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </resources>

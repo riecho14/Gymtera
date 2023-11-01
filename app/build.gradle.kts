@@ -43,8 +43,9 @@ dependencies {
     // Addons
     implementation(platform("com.google.firebase:firebase-bom:32.4.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
-    implementation ("com.github.Spikeysanju:MotionToast:1.4")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.github.Spikeysanju:MotionToast:1.4")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

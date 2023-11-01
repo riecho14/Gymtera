@@ -10,6 +10,8 @@ import androidx.core.content.res.ResourcesCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityRegisterBinding
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
@@ -104,6 +106,16 @@ class RegisterActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            val currentUser = auth.currentUser
+                            val userId = currentUser?.uid
+                            val database = FirebaseDatabase.getInstance(getString(R.string.ref_url))
+                            val userRef = database.getReference("Users")
+
+                            if (userId != null) {
+                                val userData = UserData(name, "pengunjung")
+                                userRef.child(userId).setValue(userData)
+                            }
+
                             MotionToast.createColorToast(
                                 this,
                                 "Daftar Akun Berhasil",
@@ -113,6 +125,7 @@ class RegisterActivity : AppCompatActivity() {
                                 MotionToast.LONG_DURATION,
                                 ResourcesCompat.getFont(this, R.font.ft_regular)
                             )
+
                             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                             startActivity(intent)
                             finish()
