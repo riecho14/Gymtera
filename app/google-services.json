@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296769000186",
+    "project_id": "gymtera-94be1",
+    "storage_bucket": "gymtera-94be1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296769000186:android:f12008a3d0cc9504c0ef43",
+        "android_client_info": {
+          "package_name": "com.tugasakhir.gymtera"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV-V-ByDJq_NTKYGJxOZzgH6PXgpYoZGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
