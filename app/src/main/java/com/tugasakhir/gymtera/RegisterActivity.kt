@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val email = s.toString()
-                if (!isEmailValid(email)) {
+                if (!isEmailValid(email) || !email.endsWith("itera.ac.id")) {
                     binding.textEmail.error = getString(R.string.email_error)
                     binding.textEmail.isErrorEnabled = true
                 }
@@ -84,14 +84,17 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.textEmail.editText?.text.toString()
             val password = binding.textPassword.editText?.text.toString()
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || !isEmailValid(email) || !email.endsWith(
+                    "itera.ac.id"
+                )
+            ) {
                 if (name.isEmpty()) {
                     binding.textName.error = getString(R.string.name_error)
                 } else {
                     binding.textName.isErrorEnabled = false
                 }
 
-                if (email.isEmpty()) {
+                if (email.isEmpty() || !isEmailValid(email) || !email.endsWith("itera.ac.id")) {
                     binding.textEmail.error = getString(R.string.email_error)
                 } else {
                     binding.textEmail.isErrorEnabled = false
@@ -102,6 +105,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     binding.textPassword.isErrorEnabled = false
                 }
+                return@setOnClickListener
             } else {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->

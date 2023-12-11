@@ -12,7 +12,7 @@
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="sudah_memiliki_akun_masuk">Sudah memiliki akun? <font color="#BFA045">Masuk</font></string>
     <string name="daftar">Daftar</string>
-    <string name="email_error">Silakan masukkan alamat email yang benar</string>
+    <string name="email_error">Silakan masukkan alamat email ITERA</string>
     <string name="password_error">Jumlah password minimal 8 karakter</string>
     <string name="silahkan_masuk_menggunakan_akun_admin_anda">Silakan masuk menggunakan akun admin Anda</string>
     <string name="masuk_sebagai_pengguna">Masuk sebagai <font color="#BFA045">pengguna</font></string>
