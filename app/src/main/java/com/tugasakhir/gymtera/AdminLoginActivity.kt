@@ -28,7 +28,7 @@ class AdminLoginActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val email = s.toString()
-                if (!isEmailValid(email)) {
+                if (!isEmailValid(email) || !email.endsWith("itera.ac.id")) {
                     binding.textEmail.error = getString(R.string.email_error)
                     binding.textEmail.isErrorEnabled = true
                 }
