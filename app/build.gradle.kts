@@ -46,6 +46,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.github.Spikeysanju:MotionToast:1.4")
+    implementation("com.github.ybq:Android-SpinKit:1.4.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

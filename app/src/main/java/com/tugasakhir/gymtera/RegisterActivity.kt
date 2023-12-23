@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.CubeGrid
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -80,6 +85,15 @@ class RegisterActivity : AppCompatActivity() {
 
         // Click Listener
         binding.btDaftar.setOnClickListener {
+            val btDaftar = findViewById<MaterialButton>(R.id.bt_daftar)
+            btDaftar.isEnabled = false
+
+            // Loading
+            val progressBar: ProgressBar = findViewById(R.id.loading)
+            val cubeGrid: Sprite = CubeGrid()
+            progressBar.indeterminateDrawable = cubeGrid
+            progressBar.visibility = View.VISIBLE
+
             val name = binding.textName.editText?.text.toString()
             val email = binding.textEmail.editText?.text.toString()
             val password = binding.textPassword.editText?.text.toString()
@@ -88,6 +102,8 @@ class RegisterActivity : AppCompatActivity() {
                     "itera.ac.id"
                 )
             ) {
+                btDaftar.isEnabled = true
+                progressBar.visibility = View.GONE
                 if (name.isEmpty()) {
                     binding.textName.error = getString(R.string.name_error)
                 } else {
@@ -109,6 +125,8 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        btDaftar.isEnabled = true
+                        progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
                             val userId = currentUser?.uid
@@ -134,6 +152,8 @@ class RegisterActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         } else {
+                            btDaftar.isEnabled = true
+                            progressBar.visibility = View.GONE
                             MotionToast.createColorToast(
                                 this,
                                 "Daftar Akun Gagal",

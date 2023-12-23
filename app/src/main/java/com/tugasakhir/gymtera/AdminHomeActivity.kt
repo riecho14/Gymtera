@@ -1,14 +1,14 @@
 package com.tugasakhir.gymtera
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.tugasakhir.gymtera.databinding.ActivityHomeBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.tugasakhir.gymtera.databinding.ActivityAdminHomeBinding
 
 class AdminHomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityAdminHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityAdminHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

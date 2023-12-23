@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.Gymtera" parent="Base.Theme.Gymtera" />
+
+    <style name="Toolbar.SubtitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="fontFamily">@font/ft_bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

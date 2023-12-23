@@ -134,6 +134,7 @@
         android:backgroundTint="@color/gold"
         android:fontFamily="@font/ft_medium"
         android:text="@string/masuk"
+        android:enabled="true"
         tools:ignore="VisualLintButtonSize,TextContrastCheck">
 
     </com.google.android.material.button.MaterialButton>
@@ -160,4 +161,15 @@
         android:fontFamily="@font/ft_regular"
         android:text="@string/belum_memiliki_akun_daftar"
         android:textSize="12sp" />
+
+    <!-- Loading -->
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/loading"
+        style="@style/SpinKitView.CubeGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/gold" />
 </RelativeLayout>

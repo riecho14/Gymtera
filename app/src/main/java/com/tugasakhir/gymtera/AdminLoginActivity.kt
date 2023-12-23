@@ -6,7 +6,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
 import androidx.core.content.res.ResourcesCompat
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.CubeGrid
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -65,10 +70,21 @@ class AdminLoginActivity : AppCompatActivity() {
 
         // Click Listener
         binding.btMasuk.setOnClickListener {
+            val btMasuk = findViewById<MaterialButton>(R.id.bt_masuk)
+            btMasuk.isEnabled = false
+
+            // Loading
+            val progressBar: ProgressBar = findViewById(R.id.loading)
+            val cubeGrid: Sprite = CubeGrid()
+            progressBar.indeterminateDrawable = cubeGrid
+            progressBar.visibility = View.VISIBLE
+
             val email = binding.textEmail.editText?.text.toString()
             val password = binding.textPassword.editText?.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
+                btMasuk.isEnabled = true
+                progressBar.visibility = View.GONE
                 if (email.isEmpty()) {
                     binding.textEmail.error = getString(R.string.email_error)
                 } else {
@@ -83,6 +99,8 @@ class AdminLoginActivity : AppCompatActivity() {
             } else {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        btMasuk.isEnabled = true
+                        progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
                             val userId = currentUser?.uid

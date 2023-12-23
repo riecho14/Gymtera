@@ -162,6 +162,7 @@
             android:layout_marginTop="36dp"
             android:layout_marginRight="86dp"
             android:backgroundTint="@color/gold"
+            android:enabled="true"
             android:fontFamily="@font/ft_medium"
             android:text="@string/daftar"
             tools:ignore="VisualLintButtonSize,TextContrastCheck">
@@ -191,5 +192,16 @@
             android:fontFamily="@font/ft_regular"
             android:text="@string/sudah_memiliki_akun_masuk"
             android:textSize="12sp" />
+
+        <!-- Loading -->
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loading"
+            style="@style/SpinKitView.CubeGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/gold" />
     </RelativeLayout>
 </ScrollView>
