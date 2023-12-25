@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gold">#BFA045</color>
+    <color name="sec_gold">#99BFA045</color>
 </resources>

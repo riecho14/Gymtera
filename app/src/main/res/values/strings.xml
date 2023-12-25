@@ -19,5 +19,9 @@
     <string name="name_error">Silakan isi nama lengkap Anda</string>
     <string name="ref_url">https://gymtera-94be1-default-rtdb.asia-southeast1.firebasedatabase.app</string>
     <string name="logout">Logout</string>
-    <string name="ericho_aldo_firano">Ericho Aldo Firano</string>
+    <string name="username">User Name</string>
+    <string name="jenis_alat">Jenis Alat</string>
+    <string name="pilih_latihan">Pilih Latihan</string>
+    <string name="hitung_bmi">Hitung BMI</string>
+    <string name="presensi">Presensi</string>
 </resources>
