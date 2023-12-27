@@ -19,9 +19,24 @@
     <string name="name_error">Silakan isi nama lengkap Anda</string>
     <string name="ref_url">https://gymtera-94be1-default-rtdb.asia-southeast1.firebasedatabase.app</string>
     <string name="logout">Logout</string>
-    <string name="username">User Name</string>
+    <string name="loading">Loading...</string>
     <string name="jenis_alat">Jenis Alat</string>
     <string name="pilih_latihan">Pilih Latihan</string>
     <string name="hitung_bmi">Hitung BMI</string>
     <string name="presensi">Presensi</string>
+    <string name="male">Laki-laki</string>
+    <string name="female">Perempuan</string>
+    <string name="height">Tinggi Badan</string>
+    <string name="_0cm">0cm</string>
+    <string name="weight">Berat Badan</string>
+    <string name="_50">50</string>
+    <string name="minus">minus</string>
+    <string name="plus">plus</string>
+    <string name="age">Usia</string>
+    <string name="_19">25</string>
+    <string name="calculate">Hitung</string>
+    <string name="cm">cm</string>
+    <string name="normal_bmi_range">Rentang BMI normal :</string>
+    <string name="_18_5_25_kg_m2">18,5 – 25 kg/m²</string>
+    <string name="your_age">Usia Anda :</string>
 </resources>

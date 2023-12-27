@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.tugasakhir.gymtera.addon.Preferences
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityHomeBinding
 import www.sanju.motiontoast.MotionToast
@@ -42,6 +43,9 @@ class HomeActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.logout -> {
+                    val preferences = Preferences(this)
+                    preferences.prefClear()
+
                     auth.signOut()
                     MotionToast.createColorToast(
                         this,
@@ -70,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val userData = snapshot.getValue(UserData::class.java)
-                        val username = userData?.fullname ?: getString(R.string.username)
+                        val username = userData?.fullname ?: getString(R.string.loading)
                         binding.profileName.text = username
                     }
 
@@ -78,6 +82,13 @@ class HomeActivity : AppCompatActivity() {
                         // Nothing
                     }
                 })
+        }
+
+        // Menu click listener
+        binding.menuBmi.setOnClickListener {
+            val intent = Intent(this, BMIActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

@@ -16,6 +16,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.tugasakhir.gymtera.addon.Preferences
 import com.tugasakhir.gymtera.databinding.ActivityAdminLoginBinding
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
@@ -112,6 +113,10 @@ class AdminLoginActivity : AppCompatActivity() {
                                     val userData =
                                         snapshot.getValue(com.tugasakhir.gymtera.data.UserData::class.java)
                                     if (userData?.role == "pengelola") {
+                                        val preferences = Preferences(this)
+                                        preferences.prefStatus = true
+                                        preferences.prefRole = "pengelola"
+
                                         MotionToast.createColorToast(
                                             this,
                                             "Login Berhasil",

@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gold">#BFA045</color>
     <color name="sec_gold">#99BFA045</color>
+    <color name="tint">#8D8E99</color>
 </resources>
