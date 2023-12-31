@@ -1,4 +1,4 @@
-package com.tugasakhir.gymtera
+package com.tugasakhir.gymtera.user.features
 
 import android.content.Intent
 import android.graphics.Color

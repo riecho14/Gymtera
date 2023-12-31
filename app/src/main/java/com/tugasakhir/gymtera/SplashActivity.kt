@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
 import com.tugasakhir.gymtera.databinding.ActivitySplashBinding
+import com.tugasakhir.gymtera.user.LoginActivity
 
 @Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")

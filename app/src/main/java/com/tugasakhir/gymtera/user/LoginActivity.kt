@@ -1,12 +1,14 @@
-package com.tugasakhir.gymtera
+package com.tugasakhir.gymtera.user
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.github.ybq.android.spinkit.sprite.Sprite
@@ -16,37 +18,27 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.tugasakhir.gymtera.data.UserData
-import com.tugasakhir.gymtera.databinding.ActivityRegisterBinding
+import com.tugasakhir.gymtera.R
+import com.tugasakhir.gymtera.addon.Preferences
+import com.tugasakhir.gymtera.admin.AdminHomeActivity
+import com.tugasakhir.gymtera.admin.AdminLoginActivity
+import com.tugasakhir.gymtera.databinding.ActivityLoginBinding
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
-class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
+class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = Firebase.auth
 
         // Text Watcher
-        binding.textName.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.textName.isErrorEnabled = false
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
-
         binding.textEmail.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 binding.textEmail.isErrorEnabled = false
@@ -84,9 +76,9 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Click Listener
-        binding.btDaftar.setOnClickListener {
-            val btDaftar = findViewById<MaterialButton>(R.id.bt_daftar)
-            btDaftar.isEnabled = false
+        binding.btMasuk.setOnClickListener {
+            val btMasuk = findViewById<MaterialButton>(R.id.bt_masuk)
+            btMasuk.isEnabled = false
 
             // Loading
             val progressBar: ProgressBar = findViewById(R.id.loading)
@@ -94,23 +86,13 @@ class RegisterActivity : AppCompatActivity() {
             progressBar.indeterminateDrawable = cubeGrid
             progressBar.visibility = View.VISIBLE
 
-            val name = binding.textName.editText?.text.toString()
             val email = binding.textEmail.editText?.text.toString()
             val password = binding.textPassword.editText?.text.toString()
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || !isEmailValid(email) || !email.endsWith(
-                    "itera.ac.id"
-                )
-            ) {
-                btDaftar.isEnabled = true
+            if (email.isEmpty() || password.isEmpty()) {
+                btMasuk.isEnabled = true
                 progressBar.visibility = View.GONE
-                if (name.isEmpty()) {
-                    binding.textName.error = getString(R.string.name_error)
-                } else {
-                    binding.textName.isErrorEnabled = false
-                }
-
-                if (email.isEmpty() || !isEmailValid(email) || !email.endsWith("itera.ac.id")) {
+                if (email.isEmpty()) {
                     binding.textEmail.error = getString(R.string.email_error)
                 } else {
                     binding.textEmail.isErrorEnabled = false
@@ -121,11 +103,10 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     binding.textPassword.isErrorEnabled = false
                 }
-                return@setOnClickListener
             } else {
-                auth.createUserWithEmailAndPassword(email, password)
+                auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
-                        btDaftar.isEnabled = true
+                        btMasuk.isEnabled = true
                         progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
@@ -134,30 +115,45 @@ class RegisterActivity : AppCompatActivity() {
                             val userRef = database.getReference("Users")
 
                             if (userId != null) {
-                                val userData = UserData(name, "pengunjung")
-                                userRef.child(userId).setValue(userData)
+                                userRef.child(userId).get().addOnSuccessListener { snapshot ->
+                                    val userData =
+                                        snapshot.getValue(com.tugasakhir.gymtera.data.UserData::class.java)
+                                    if (userData?.role == "pengunjung") {
+                                        val preferences = Preferences(this)
+                                        preferences.prefStatus = true
+                                        preferences.prefRole = "pengunjung"
+
+                                        MotionToast.createColorToast(
+                                            this,
+                                            "Login Berhasil",
+                                            "Anda berhasil masuk ke akun",
+                                            MotionToastStyle.SUCCESS,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(this, R.font.ft_regular)
+                                        )
+
+                                        val intent = Intent(this, HomeActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    } else {
+                                        MotionToast.createColorToast(
+                                            this,
+                                            "Login Gagal",
+                                            "Silakan periksa kembali akun anda",
+                                            MotionToastStyle.ERROR,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(this, R.font.ft_regular)
+                                        )
+                                    }
+                                }
                             }
-
-                            MotionToast.createColorToast(
-                                this,
-                                "Daftar Akun Berhasil",
-                                "Silahkan masuk menggunakan akun yang telah terdaftar",
-                                MotionToastStyle.SUCCESS,
-                                MotionToast.GRAVITY_BOTTOM,
-                                MotionToast.LONG_DURATION,
-                                ResourcesCompat.getFont(this, R.font.ft_regular)
-                            )
-
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         } else {
-                            btDaftar.isEnabled = true
-                            progressBar.visibility = View.GONE
                             MotionToast.createColorToast(
                                 this,
-                                "Daftar Akun Gagal",
-                                "Silakan isi data sesuai dengan ketentuan yang diberikan",
+                                "Login Gagal",
+                                "Silakan periksa kembali akun anda",
                                 MotionToastStyle.ERROR,
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.LONG_DURATION,
@@ -175,9 +171,24 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.bottom2.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        // Check the saved preferences
+        val preferences = Preferences(this)
+        if (preferences.prefStatus) {
+            val role = preferences.prefRole
+            if (role == "pengunjung") {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                val intent = Intent(this, AdminHomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 

@@ -1,13 +1,19 @@
-package com.tugasakhir.gymtera
+package com.tugasakhir.gymtera.user.features
 
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.core.content.res.ResourcesCompat
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.CubeGrid
+import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.databinding.ActivityBmiactivityBinding
+import com.tugasakhir.gymtera.user.HomeActivity
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -83,8 +89,20 @@ class BMIActivity : AppCompatActivity() {
                             ResourcesCompat.getFont(this@BMIActivity, R.font.ft_regular)
                         )
                     } else {
+                        // Loading
+                        val progressBar: ProgressBar = findViewById(R.id.loading)
+                        val cubeGrid: Sprite = CubeGrid()
+                        progressBar.indeterminateDrawable = cubeGrid
+                        progressBar.visibility = View.VISIBLE
+                        binding.calculate.isEnabled = false
+
                         weight = binding.weightTxt.text.toString().toFloat()
-                        calculateBMI(age.text.toString())
+
+                        Handler().postDelayed({
+                            calculateBMI(binding.age.text.toString())
+                            progressBar.visibility = View.GONE
+                            binding.calculate.isEnabled = true
+                        }, 3000)
                     }
                 } else {
                     MotionToast.createColorToast(
@@ -139,6 +157,7 @@ class BMIActivity : AppCompatActivity() {
         intent.putExtra(ResultBMIActivity.EXTRA_BMI, bmi)
         intent.putExtra(ResultBMIActivity.EXTRA_AGE, age)
         startActivity(intent)
+        finish()
     }
 
     @Deprecated("Deprecated in Java")

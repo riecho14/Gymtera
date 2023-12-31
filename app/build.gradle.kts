@@ -45,8 +45,11 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
     implementation("com.github.Spikeysanju:MotionToast:1.4")
     implementation("com.github.ybq:Android-SpinKit:1.4.0")
+    implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

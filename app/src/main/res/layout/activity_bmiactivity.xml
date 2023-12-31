@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BMIActivity">
+    tools:context=".user.features.BMIActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -324,19 +324,37 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/calculate"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="62dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/gold"
+        android:enabled="true"
         android:fontFamily="@font/ft_medium"
-        android:text="@string/calculate"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
+        android:text="@string/hitung_bmi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="VisualLintButtonSize,TextContrastCheck,DuplicateSpeakableTextCheck">
+
+    </com.google.android.material.button.MaterialButton>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="18dp">
+
+        <!-- Loading -->
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loading"
+            style="@style/SpinKitView.CubeGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/gold" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

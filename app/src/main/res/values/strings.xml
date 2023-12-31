@@ -39,4 +39,11 @@
     <string name="normal_bmi_range">Rentang BMI normal :</string>
     <string name="_18_5_25_kg_m2">18,5 – 25 kg/m²</string>
     <string name="your_age">Usia Anda :</string>
+    <string name="alat_gerakan"><![CDATA[Alat & Gerakan]]></string>
+    <string name="nama_alat">Nama Alat</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="tambahkan">Tambahkan</string>
+    <string name="storage_url">gs://gymtera-94be1.appspot.com</string>
+    <string name="kategori">Kategori</string>
+    <string name="hapus_latihan">Hapus Latihan</string>
 </resources>

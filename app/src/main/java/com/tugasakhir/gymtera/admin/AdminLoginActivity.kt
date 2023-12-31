@@ -1,14 +1,12 @@
-package com.tugasakhir.gymtera
+package com.tugasakhir.gymtera.admin
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.github.ybq.android.spinkit.sprite.Sprite
@@ -18,19 +16,20 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.addon.Preferences
-import com.tugasakhir.gymtera.databinding.ActivityLoginBinding
+import com.tugasakhir.gymtera.databinding.ActivityAdminLoginBinding
+import com.tugasakhir.gymtera.user.LoginActivity
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class AdminLoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAdminLoginBinding
     private lateinit var auth: FirebaseAuth
 
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityAdminLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = Firebase.auth
@@ -115,10 +114,10 @@ class LoginActivity : AppCompatActivity() {
                                 userRef.child(userId).get().addOnSuccessListener { snapshot ->
                                     val userData =
                                         snapshot.getValue(com.tugasakhir.gymtera.data.UserData::class.java)
-                                    if (userData?.role == "pengunjung") {
+                                    if (userData?.role == "pengelola") {
                                         val preferences = Preferences(this)
                                         preferences.prefStatus = true
-                                        preferences.prefRole = "pengunjung"
+                                        preferences.prefRole = "pengelola"
 
                                         MotionToast.createColorToast(
                                             this,
@@ -130,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
                                             ResourcesCompat.getFont(this, R.font.ft_regular)
                                         )
 
-                                        val intent = Intent(this, HomeActivity::class.java)
+                                        val intent = Intent(this, AdminHomeActivity::class.java)
                                         startActivity(intent)
                                         finish()
                                     } else {
@@ -162,30 +161,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.bottom1.setOnClickListener {
-            val intent = Intent(this, AdminLoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }
-
-        binding.bottom2.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        // Check the saved preferences
-        val preferences = Preferences(this)
-        if (preferences.prefStatus) {
-            val role = preferences.prefRole
-            if (role == "pengunjung") {
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                val intent = Intent(this, AdminHomeActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.tugasakhir.gymtera
+package com.tugasakhir.gymtera.user
 
 import android.content.Intent
 import android.graphics.Color
@@ -14,9 +14,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.addon.Preferences
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityHomeBinding
+import com.tugasakhir.gymtera.user.features.BMIActivity
+import com.tugasakhir.gymtera.user.features.EquipmentActivity
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -87,6 +90,12 @@ class HomeActivity : AppCompatActivity() {
         // Menu click listener
         binding.menuBmi.setOnClickListener {
             val intent = Intent(this, BMIActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.menuEquip.setOnClickListener {
+            val intent = Intent(this, EquipmentActivity::class.java)
             startActivity(intent)
             finish()
         }

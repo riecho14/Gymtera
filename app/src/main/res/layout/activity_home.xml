@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".user.HomeActivity">
 
     <!-- TopBar -->
     <com.google.android.material.appbar.MaterialToolbar
@@ -114,6 +114,7 @@
         app:layout_constraintVertical_weight="8">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/menu_equip"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_marginEnd="52dp"
