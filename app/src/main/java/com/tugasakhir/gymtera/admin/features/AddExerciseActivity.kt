@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.MultiAutoCompleteTextView
 import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -60,6 +62,14 @@ class AddExerciseActivity : AppCompatActivity() {
         val items = arrayOf("Beginner", "Intermediate", "Advance")
         (binding.kategori.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
 
+        val musclesTextView = binding.muscles.editText as MultiAutoCompleteTextView
+        val muscles = arrayOf(
+            "Abs", "Back", "Biceps", "Chest", "Forearm", "Legs", "Shoulders", "Traps", "Triceps"
+        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, muscles)
+        musclesTextView.setAdapter(adapter)
+        musclesTextView.setTokenizer(object : MultiAutoCompleteTextView.CommaTokenizer() {})
+
         binding.cardView6.setOnClickListener {
             openGallery()
         }
@@ -67,13 +77,14 @@ class AddExerciseActivity : AppCompatActivity() {
         binding.tambah.setOnClickListener {
             val exerciseName = binding.namaLatihan.editText?.text.toString()
             val exerciseDesc = binding.deskripsiLatihan.editText?.text.toString()
+            val exerciseMuscles = binding.muscles.editText?.text.toString()
             val exerciseCategory = binding.kategori.editText?.text.toString()
 
-            if (exerciseName.isEmpty() || exerciseDesc.isEmpty() || exerciseCategory.isEmpty()) {
+            if (exerciseName.isEmpty() || exerciseDesc.isEmpty() || exerciseCategory.isEmpty() || exerciseMuscles.isEmpty()) {
                 MotionToast.createColorToast(
                     this,
                     "Kesalahan",
-                    "Nama latihan, deskripsi dan kategori tidak boleh kosong",
+                    "Semua inputan yang tersedia tidak boleh kosong",
                     MotionToastStyle.ERROR,
                     MotionToast.GRAVITY_BOTTOM,
                     MotionToast.LONG_DURATION,
@@ -115,6 +126,14 @@ class AddExerciseActivity : AppCompatActivity() {
                 )
             }
         } else {
+            // Loading
+            val progressBar: ProgressBar = findViewById(R.id.loading)
+            val cubeGrid: Sprite = CubeGrid()
+            progressBar.indeterminateDrawable = cubeGrid
+            progressBar.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            binding.tambah.isEnabled = true
+
             MotionToast.createColorToast(
                 this,
                 "Kesalahan",
@@ -146,8 +165,10 @@ class AddExerciseActivity : AppCompatActivity() {
         val exerciseName = binding.namaLatihan.editText?.text.toString()
         val exerciseDesc = binding.deskripsiLatihan.editText?.text.toString()
         val exerciseCategory = binding.kategori.editText?.text.toString()
+        val exerciseMuscles = binding.muscles.editText?.text.toString()
 
-        val exerciseData = ExerciseData(exerciseName, exerciseDesc, exerciseCategory, exerImage)
+        val exerciseData =
+            ExerciseData(exerciseName, exerciseDesc, exerciseCategory, exerciseMuscles, exerImage)
 
         // Push data to the database
         if (equipmentId != null && exerciseId != null) {

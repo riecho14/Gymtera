@@ -55,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="62dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/nama_alat"
+        android:hint="@string/nama_latihan"
         app:boxStrokeColor="@color/gold"
         app:cursorColor="@color/gold"
         app:helperTextTextColor="@color/gold"
@@ -99,6 +99,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/muscles"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/jenis_latihan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deskripsi_latihan">
+
+        <MultiAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/kategori"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
@@ -109,7 +130,7 @@
         android:hint="@string/kategori"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deskripsi_latihan">
+        app:layout_constraintTop_toBottomOf="@+id/muscles">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"

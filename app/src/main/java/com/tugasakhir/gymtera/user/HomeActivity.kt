@@ -20,6 +20,7 @@ import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityHomeBinding
 import com.tugasakhir.gymtera.user.features.BMIActivity
 import com.tugasakhir.gymtera.user.features.EquipmentActivity
+import com.tugasakhir.gymtera.user.features.TrainingActivity
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -87,7 +88,7 @@ class HomeActivity : AppCompatActivity() {
                 })
         }
 
-        // Menu click listener
+        // Binding components
         binding.menuBmi.setOnClickListener {
             val intent = Intent(this, BMIActivity::class.java)
             startActivity(intent)
@@ -96,6 +97,12 @@ class HomeActivity : AppCompatActivity() {
 
         binding.menuEquip.setOnClickListener {
             val intent = Intent(this, EquipmentActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.menuTraining.setOnClickListener {
+            val intent = Intent(this, TrainingActivity::class.java)
             startActivity(intent)
             finish()
         }

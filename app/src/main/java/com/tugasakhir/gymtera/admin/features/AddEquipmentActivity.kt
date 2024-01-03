@@ -111,6 +111,14 @@ class AddEquipmentActivity : AppCompatActivity() {
                 )
             }
         } else {
+            // Loading
+            val progressBar: ProgressBar = findViewById(R.id.loading)
+            val cubeGrid: Sprite = CubeGrid()
+            progressBar.indeterminateDrawable = cubeGrid
+            progressBar.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            binding.tambah.isEnabled = true
+
             MotionToast.createColorToast(
                 this,
                 "Kesalahan",

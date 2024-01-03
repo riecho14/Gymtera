@@ -46,4 +46,12 @@
     <string name="storage_url">gs://gymtera-94be1.appspot.com</string>
     <string name="kategori">Kategori</string>
     <string name="hapus_latihan">Hapus Latihan</string>
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advanced">Advanced</string>
+    <string name="jenis_latihan">Jenis Latihan</string>
+    <string name="selesai">Selesai</string>
+    <string name="sets">Sets :</string>
+    <string name="reps">Reps :</string>
+    <string name="nama_latihan">Nama Latihan</string>
 </resources>
