@@ -25,6 +25,7 @@ class ResultTrainingActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_DIFFICULTY = "extra_difficulty"
         const val EXTRA_SELECTED_TRAINING = "extra_selected_training"
+        private const val REQUEST_DETAIL_SESSION = 1
     }
 
     private lateinit var binding: ActivityResultTrainingBinding
@@ -74,6 +75,8 @@ class ResultTrainingActivity : AppCompatActivity() {
                                 val exerciseData =
                                     exerciseSnapshot.getValue(ExerciseData::class.java)
                                 if (exerciseData != null) {
+                                    exerciseData.exerciseId = exerciseSnapshot.key
+                                    exerciseData.equipmentId = equipmentSnapshot.key
                                     when {
                                         difficulty.equals("beginner", ignoreCase = true) -> {
                                             if (exerciseData.exerCategory!!.toLowerCase(Locale.ROOT)
@@ -160,6 +163,16 @@ class ResultTrainingActivity : AppCompatActivity() {
                                     if (allItemsChecked) View.VISIBLE else View.GONE
                             }
                         }
+
+                    sessionAdapter.setOnItemClickListener { _, _, position ->
+                        val clickedItem = sessionAdapter.getItem(position)
+                        clickedItem?.let {
+                            startDetailActivityForResult(
+                                exerciseId = clickedItem.exerciseId,
+                                equipmentId = clickedItem.equipmentId
+                            )
+                        }
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -172,6 +185,21 @@ class ResultTrainingActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun startDetailActivityForResult(exerciseId: String?, equipmentId: String?) {
+        val intent = Intent(this@ResultTrainingActivity, DetailSessionActivity::class.java)
+        intent.putExtra("exerciseId", exerciseId)
+        intent.putExtra("equipmentId", equipmentId)
+        startActivityForResult(intent, REQUEST_DETAIL_SESSION)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_DETAIL_SESSION && resultCode == RESULT_OK) {
+            // Nothing
         }
     }
 

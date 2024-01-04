@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Gymtera"
         tools:targetApi="31">
         <activity
+            android:name=".user.features.DetailSessionActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.features.ResultTrainingActivity"
             android:exported="false" />
         <activity

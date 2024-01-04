@@ -5,5 +5,7 @@ data class ExerciseData(
     var exerDesc: String? = null,
     var exerCategory: String? = null,
     var exerMuscle: String? = null,
-    var exerImage: String? = null
+    var exerImage: String? = null,
+    var exerciseId: String? = null,
+    var equipmentId: String? = null
 )
