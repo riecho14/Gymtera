@@ -54,4 +54,7 @@
     <string name="sets">Sets :</string>
     <string name="reps">Reps :</string>
     <string name="nama_latihan">Nama Latihan</string>
+    <string name="lihat_riwayat_presensi">Lihat riwayat presensi</string>
+    <string name="desc_attendance">Sebelum melakukan presensi, harap pastikan bahwa izin lokasi pada perangkat Anda telah diaktifkan dan pastikan juga bahwa Anda berada di lokasi Gym ITERA. Hal ini sangat penting untuk memastikan akurasi presensi dan mematuhi aturan yang berlaku.</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

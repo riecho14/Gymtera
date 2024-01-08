@@ -168,13 +168,7 @@ class AddExerciseActivity : AppCompatActivity() {
         val exerciseMuscles = binding.muscles.editText?.text.toString()
 
         val exerciseData = ExerciseData(
-            exerciseName,
-            exerciseDesc,
-            exerciseCategory,
-            exerciseMuscles,
-            exerImage,
-            exerciseId,
-            equipmentId
+            exerciseName, exerciseDesc, exerciseCategory, exerciseMuscles, exerImage
         )
 
         // Push data to the database

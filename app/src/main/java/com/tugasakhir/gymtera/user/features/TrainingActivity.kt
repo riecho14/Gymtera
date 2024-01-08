@@ -63,13 +63,22 @@ class TrainingActivity : AppCompatActivity() {
             val selectedTraining = adapter.getItem(position)
             val selectedDifficulty = getSelectedDifficulty()
 
-            if (selectedDifficulty != null) {
-                val intent = Intent(this, ResultTrainingActivity::class.java).apply {
-                    putExtra(ResultTrainingActivity.EXTRA_DIFFICULTY, selectedDifficulty)
-                    putExtra(ResultTrainingActivity.EXTRA_SELECTED_TRAINING, selectedTraining)
+            if (selectedTraining != null && selectedDifficulty != null) {
+                if (selectedTraining.name.equals("Seluruh Tubuh", ignoreCase = true)) {
+                    val intent = Intent(this, AllBodyActivity::class.java).apply {
+                        putExtra(ResultTrainingActivity.EXTRA_DIFFICULTY, selectedDifficulty)
+                        putExtra(ResultTrainingActivity.EXTRA_SELECTED_TRAINING, selectedTraining)
+                    }
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val intent = Intent(this, ResultTrainingActivity::class.java).apply {
+                        putExtra(ResultTrainingActivity.EXTRA_DIFFICULTY, selectedDifficulty)
+                        putExtra(ResultTrainingActivity.EXTRA_SELECTED_TRAINING, selectedTraining)
+                    }
+                    startActivity(intent)
+                    finish()
                 }
-                startActivity(intent)
-                finish()
             } else {
                 MotionToast.createColorToast(
                     this,
@@ -82,6 +91,7 @@ class TrainingActivity : AppCompatActivity() {
                 )
             }
         }
+
     }
 
     private fun getSelectedDifficulty(): String? {

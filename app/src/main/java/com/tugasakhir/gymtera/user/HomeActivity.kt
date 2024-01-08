@@ -18,6 +18,7 @@ import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.addon.Preferences
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityHomeBinding
+import com.tugasakhir.gymtera.user.features.AttendanceActivity
 import com.tugasakhir.gymtera.user.features.BMIActivity
 import com.tugasakhir.gymtera.user.features.EquipmentActivity
 import com.tugasakhir.gymtera.user.features.TrainingActivity
@@ -103,6 +104,12 @@ class HomeActivity : AppCompatActivity() {
 
         binding.menuTraining.setOnClickListener {
             val intent = Intent(this, TrainingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.menuPresensi.setOnClickListener {
+            val intent = Intent(this, AttendanceActivity::class.java)
             startActivity(intent)
             finish()
         }
