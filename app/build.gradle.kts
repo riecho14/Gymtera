@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tugasakhir.gymtera"
-        minSdk = 24
+        minSdk = 26
         //noinspection OldTargetApi
         targetSdk = 33
         versionCode = 1
@@ -53,6 +53,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.airbnb.android:lottie:6.3.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("org.apache.poi:poi:5.2.2")
+    implementation("org.apache.poi:poi-ooxml:5.2.2")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

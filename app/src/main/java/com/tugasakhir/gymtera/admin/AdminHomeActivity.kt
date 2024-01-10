@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.addon.Preferences
+import com.tugasakhir.gymtera.admin.features.AdminAttendanceActivity
 import com.tugasakhir.gymtera.admin.features.AdminEquipmentActivity
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityAdminHomeBinding
@@ -89,6 +90,12 @@ class AdminHomeActivity : AppCompatActivity() {
         // Binding components
         binding.alatGerakan.setOnClickListener {
             val intent = Intent(this, AdminEquipmentActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.attendance.setOnClickListener {
+            val intent = Intent(this, AdminAttendanceActivity::class.java)
             startActivity(intent)
             finish()
         }
