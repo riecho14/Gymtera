@@ -187,6 +187,12 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.forgotPW.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         // Check the saved preferences
         val preferences = Preferences(this)
         if (preferences.prefStatus) {

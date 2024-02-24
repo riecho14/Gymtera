@@ -57,4 +57,7 @@
     <string name="lihat_riwayat_presensi">Lihat riwayat presensi</string>
     <string name="desc_attendance">Sebelum melakukan presensi, harap pastikan bahwa izin lokasi pada perangkat Anda telah diaktifkan dan pastikan juga bahwa Anda berada di lokasi Gym ITERA. Hal ini sangat penting untuk memastikan akurasi presensi dan mematuhi aturan yang berlaku.</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="lupa_password">Lupa Password</string>
+    <string name="silakan_masukkan_alamat_email_anda">Silakan masukkan alamat email Anda</string>
+    <string name="reset_password">Reset Password</string>
 </resources>
