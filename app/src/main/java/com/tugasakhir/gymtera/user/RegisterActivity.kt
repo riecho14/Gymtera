@@ -131,6 +131,36 @@ class RegisterActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
+                            currentUser?.sendEmailVerification()
+                                ?.addOnCompleteListener { emailTask ->
+                                    if (emailTask.isSuccessful) {
+                                        MotionToast.createColorToast(
+                                            this,
+                                            "Daftar Akun Berhasil",
+                                            "Silahkan cek email Anda untuk verifikasi",
+                                            MotionToastStyle.SUCCESS,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(this, R.font.ft_regular)
+                                        )
+
+                                        val intent =
+                                            Intent(this@RegisterActivity, LoginActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+
+                                    } else {
+                                        MotionToast.createColorToast(
+                                            this,
+                                            "Daftar Akun Gagal",
+                                            "Gagal mengirim email verifikasi",
+                                            MotionToastStyle.ERROR,
+                                            MotionToast.GRAVITY_BOTTOM,
+                                            MotionToast.LONG_DURATION,
+                                            ResourcesCompat.getFont(this, R.font.ft_regular)
+                                        )
+                                    }
+                                }
                             val userId = currentUser?.uid
                             val database = FirebaseDatabase.getInstance(getString(R.string.ref_url))
                             val userRef = database.getReference("Users")
@@ -140,19 +170,6 @@ class RegisterActivity : AppCompatActivity() {
                                 userRef.child(userId).setValue(userData)
                             }
 
-                            MotionToast.createColorToast(
-                                this,
-                                "Daftar Akun Berhasil",
-                                "Silahkan masuk menggunakan akun yang telah terdaftar",
-                                MotionToastStyle.SUCCESS,
-                                MotionToast.GRAVITY_BOTTOM,
-                                MotionToast.LONG_DURATION,
-                                ResourcesCompat.getFont(this, R.font.ft_regular)
-                            )
-
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         } else {
                             btDaftar.isEnabled = true
                             progressBar.visibility = View.GONE

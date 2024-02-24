@@ -40,28 +40,27 @@ class ExerciseActivity : AppCompatActivity() {
 
         exerciseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val exerciseList = mutableListOf<ExerciseData>()
+                val exerciseList = mutableListOf<Pair<String, ExerciseData>>()
 
                 for (data in snapshot.children) {
+                    val exerciseId = data.key
                     val exercise = data.getValue(ExerciseData::class.java)
                     exercise?.let {
-                        exerciseList.add(it)
+                        exerciseList.add(Pair(exerciseId!!, it))
                     }
                 }
-                exerciseList.sortBy { it.exerName }
+                exerciseList.sortBy { it.second.exerName }
                 exerciseAdapter.setItemAnimation(BaseQuickAdapter.AnimationType.SlideInLeft)
-                exerciseAdapter.submitList(exerciseList)
+                exerciseAdapter.submitList(exerciseList.map { it.second })
 
                 exerciseAdapter.setOnItemClickListener { _, _, position ->
-                    val clickedItem = exerciseAdapter.getItem(position)
-                    clickedItem?.let {
-                        val intent = Intent(this@ExerciseActivity, DetailActivity::class.java)
+                    val (exerciseId, _) = exerciseList[position]
+                    val intent = Intent(this@ExerciseActivity, DetailActivity::class.java)
 
-                        intent.putExtra("exerciseId", snapshot.children.elementAt(position).key)
-                        intent.putExtra("equipmentId", equipmentId)
-                        startActivity(intent)
-                        finish()
-                    }
+                    intent.putExtra("exerciseId", exerciseId)
+                    intent.putExtra("equipmentId", equipmentId)
+                    startActivity(intent)
+                    finish()
                 }
             }
 

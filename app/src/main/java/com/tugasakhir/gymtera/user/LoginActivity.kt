@@ -110,11 +110,12 @@ class LoginActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
-                            val userId = currentUser?.uid
-                            val database = FirebaseDatabase.getInstance(getString(R.string.ref_url))
-                            val userRef = database.getReference("Users")
+                            if (currentUser != null && currentUser.isEmailVerified) {
+                                val userId = currentUser.uid
+                                val database =
+                                    FirebaseDatabase.getInstance(getString(R.string.ref_url))
+                                val userRef = database.getReference("Users")
 
-                            if (userId != null) {
                                 userRef.child(userId).get().addOnSuccessListener { snapshot ->
                                     val userData =
                                         snapshot.getValue(com.tugasakhir.gymtera.data.UserData::class.java)
@@ -148,6 +149,16 @@ class LoginActivity : AppCompatActivity() {
                                         )
                                     }
                                 }
+                            } else {
+                                MotionToast.createColorToast(
+                                    this,
+                                    "Login Gagal",
+                                    "Silakan verifikasi email Anda",
+                                    MotionToastStyle.ERROR,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(this, R.font.ft_regular)
+                                )
                             }
                         } else {
                             MotionToast.createColorToast(

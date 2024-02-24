@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -37,8 +36,8 @@ import kotlin.math.sin
 class AttendanceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAttendanceBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val targetLatitude = -4.347615
-    private val targetLongitude = 104.3586067
+    private val targetLatitude = -5.359790
+    private val targetLongitude = 105.315717
     private val radius = 10.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,7 +125,9 @@ class AttendanceActivity : AppCompatActivity() {
                                 ResourcesCompat.getFont(this@AttendanceActivity, R.font.ft_regular)
                             )
 
-                            val intent = Intent(this@AttendanceActivity, HistoryAttendanceActivity::class.java)
+                            val intent = Intent(
+                                this@AttendanceActivity, HistoryAttendanceActivity::class.java
+                            )
                             startActivity(intent)
                             finish()
                         } else {
@@ -222,8 +223,6 @@ class AttendanceActivity : AppCompatActivity() {
         Log.d(
             "RadiusInfo", "Radius: $d"
         )
-        val radiusInfo = "Radius: $d meters"
-        Toast.makeText(this, radiusInfo, Toast.LENGTH_SHORT).show()
 
         return d <= radius
     }

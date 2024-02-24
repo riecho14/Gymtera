@@ -17,7 +17,6 @@ import com.tugasakhir.gymtera.data.ExerciseData
 import com.tugasakhir.gymtera.data.SessionAdapter
 import com.tugasakhir.gymtera.data.TrainingData
 import com.tugasakhir.gymtera.databinding.ActivityAllBodyBinding
-import com.tugasakhir.gymtera.user.HomeActivity
 import java.util.Locale
 
 @Suppress("DEPRECATION", "NAME_SHADOWING")
@@ -183,7 +182,7 @@ class AllBodyActivity : AppCompatActivity() {
         }
 
         binding.selesai.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, AttendanceActivity::class.java)
             startActivity(intent)
             finish()
         }

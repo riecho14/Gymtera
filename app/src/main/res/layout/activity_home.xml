@@ -122,7 +122,8 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="12dp">
+            app:cardCornerRadius="12dp"
+            tools:ignore="TextSizeCheck">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/ft_regular"
-                    android:text="@string/jenis_alat"
+                    android:text="@string/alat_gerakan"
                     android:textAlignment="center"
                     android:textSize="16sp" />
             </LinearLayout>
