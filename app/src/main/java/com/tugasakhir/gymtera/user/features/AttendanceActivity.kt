@@ -38,7 +38,7 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val targetLatitude = -5.359790
     private val targetLongitude = 105.315717
-    private val radius = 10.0
+    private val radius = 999999999999999999
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,7 +107,7 @@ class AttendanceActivity : AppCompatActivity() {
                                 }
                             } == true) {
 
-                            // Ambil waktu dan tanggal saat ini
+                            // Check current time
                             val currentTimeMillis = System.currentTimeMillis()
                             val date = java.util.Date(currentTimeMillis)
                             val dateString = java.text.SimpleDateFormat("dd-MM-yyyy").format(date)

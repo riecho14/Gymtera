@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
@@ -27,6 +28,8 @@ import java.io.IOException
 @Suppress("DEPRECATION")
 class AdminAttendanceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminAttendanceBinding
+    private var completeAttendanceList = mutableListOf<UserData>()
+    val historyAdapter = AdminHistoryAdapter()
 
     companion object {
         private const val REQUEST_WRITE_STORAGE = 1
@@ -45,7 +48,6 @@ class AdminAttendanceActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_WRITE_STORAGE
             )
         }
-
 
         // Set up toolbar menu
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -69,10 +71,24 @@ class AdminAttendanceActivity : AppCompatActivity() {
             }
         }
 
+        // Search
+        val searchView = binding.searchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { search(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { search(it) }
+                return true
+            }
+
+        })
+
         // Inisialisasi RecyclerView
         val recyclerView = binding.rvAttendanceList
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val historyAdapter = AdminHistoryAdapter()
         recyclerView.adapter = historyAdapter
 
         val database = FirebaseDatabase.getInstance(getString(R.string.ref_url))
@@ -165,7 +181,7 @@ class AdminAttendanceActivity : AppCompatActivity() {
 
         usersRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val attendanceList = mutableListOf<UserData>()
+                completeAttendanceList.clear()
 
                 for (userSnapshot in snapshot.children) {
                     userSnapshot.key
@@ -176,11 +192,11 @@ class AdminAttendanceActivity : AppCompatActivity() {
                         attendanceData?.let {
                             it.fullname =
                                 userSnapshot.child("fullname").getValue(String::class.java)
-                            attendanceList.add(it)
+                            completeAttendanceList.add(it)
                         }
                     }
                 }
-                val sortedAttendanceList = attendanceList.sortedByDescending { it.date }
+                val sortedAttendanceList = completeAttendanceList.sortedByDescending { it.date }
                 callback(sortedAttendanceList)
             }
 
@@ -188,6 +204,15 @@ class AdminAttendanceActivity : AppCompatActivity() {
                 // Handle error
             }
         })
+    }
+
+    private fun search(query: String) {
+        fetchAttendanceData { dataList ->
+            val searchResult = dataList.filter {
+                it.fullname?.contains(query, ignoreCase = true) ?: false
+            }
+            historyAdapter.submitList(searchResult)
+        }
     }
 
     @Deprecated("Deprecated in Java")
