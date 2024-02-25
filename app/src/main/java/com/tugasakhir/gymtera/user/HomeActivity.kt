@@ -67,6 +67,13 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.about -> {
+                    val intent = Intent(this, AboutActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+
                 else -> false
             }
         }
