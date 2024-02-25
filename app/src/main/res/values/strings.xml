@@ -29,11 +29,11 @@
     <string name="height">Tinggi Badan</string>
     <string name="_0cm">0cm</string>
     <string name="weight">Berat Badan</string>
-    <string name="_50">50</string>
+    <string name="_50">0</string>
     <string name="minus">minus</string>
     <string name="plus">plus</string>
     <string name="age">Usia</string>
-    <string name="_19">25</string>
+    <string name="_19">0</string>
     <string name="calculate">Hitung</string>
     <string name="cm">cm</string>
     <string name="normal_bmi_range">Rentang BMI normal :</string>

@@ -22,8 +22,8 @@ class BMIActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBmiactivityBinding
     private var height: Float = 0f
     private var weight: Float = 0f
-    private var countWeight = 50
-    private var countAge = 25
+    private var countWeight = 0
+    private var countAge = 0
     private var chosen: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,21 +60,29 @@ class BMIActivity : AppCompatActivity() {
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {}
             })
 
-            weightPlus.setOnClickListener {
-                binding.weightTxt.text = countWeight++.toString()
-            }
+            SeekbarBB.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?, progress: Int, fromUser: Boolean
+                ) {
+                    countWeight = progress
+                    binding.weightTxt.text = countWeight.toString()
+                }
 
-            weightMinus.setOnClickListener {
-                binding.weightTxt.text = countWeight--.toString()
-            }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
 
-            agePlus.setOnClickListener {
-                binding.age.text = countAge++.toString()
-            }
+            SeekbarAGE.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?, progress: Int, fromUser: Boolean
+                ) {
+                    countAge = progress
+                    binding.ageTxt.text = countAge.toString()
+                }
 
-            ageMinus.setOnClickListener {
-                binding.age.text = countAge--.toString()
-            }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            })
 
             calculate.setOnClickListener {
                 if (!chosen) {
@@ -99,7 +107,7 @@ class BMIActivity : AppCompatActivity() {
                         weight = binding.weightTxt.text.toString().toFloat()
 
                         Handler().postDelayed({
-                            calculateBMI(binding.age.text.toString())
+                            calculateBMI(binding.ageTxt.text.toString())
                             progressBar.visibility = View.GONE
                             binding.calculate.isEnabled = true
                         }, 3000)
