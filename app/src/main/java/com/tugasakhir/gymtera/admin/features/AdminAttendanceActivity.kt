@@ -111,7 +111,10 @@ class AdminAttendanceActivity : AppCompatActivity() {
                         }
                     }
                 }
-                val sortedAttendanceList = attendanceList.sortedByDescending { it.date }
+                val sortedAttendanceList = attendanceList.sortedWith(compareByDescending<UserData> {
+                    it.date?.split("-")?.get(2).orEmpty()
+                }.thenByDescending { it.date?.split("-")?.get(1).orEmpty() }
+                    .thenByDescending { it.date?.split("-")?.get(0).orEmpty() })
                 historyAdapter.submitList(sortedAttendanceList)
             }
 
