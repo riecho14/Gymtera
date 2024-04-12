@@ -18,6 +18,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.tugasakhir.gymtera.IntroActivity
 import com.tugasakhir.gymtera.R
 import com.tugasakhir.gymtera.addon.Preferences
 import com.tugasakhir.gymtera.admin.AdminHomeActivity
@@ -134,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
                                             ResourcesCompat.getFont(this, R.font.ft_regular)
                                         )
 
-                                        val intent = Intent(this, HomeActivity::class.java)
+                                        val intent = Intent(this, IntroActivity::class.java)
                                         startActivity(intent)
                                         finish()
                                     } else {
