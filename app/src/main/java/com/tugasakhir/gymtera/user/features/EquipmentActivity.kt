@@ -36,23 +36,25 @@ class EquipmentActivity : AppCompatActivity() {
         // RecyclerView options
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val equipmentList = mutableListOf<EquipmentData>()
+                val equipmentList = mutableListOf<Pair<String, EquipmentData>>()
                 for (data in snapshot.children) {
+                    val equipmentId = data.key
                     val equipment = data.getValue(EquipmentData::class.java)
                     equipment?.let {
-                        equipmentList.add(it)
+                        equipmentList.add(Pair(equipmentId!!, it))
                     }
                 }
-                equipmentList.sortBy { it.toolName }
+                equipmentList.sortBy { it.second.toolName }
                 equipmentAdapter.setItemAnimation(BaseQuickAdapter.AnimationType.SlideInLeft)
-                equipmentAdapter.submitList(equipmentList)
+                equipmentAdapter.submitList(equipmentList.map { it.second })
 
                 equipmentAdapter.setOnItemClickListener { _, _, position ->
                     val clickedItem = equipmentAdapter.getItem(position)
                     clickedItem?.let {
+                        val equipmentId = equipmentList[position].first
                         val intent = Intent(this@EquipmentActivity, ExerciseActivity::class.java)
 
-                        intent.putExtra("equipmentId", snapshot.children.elementAt(position).key)
+                        intent.putExtra("equipmentId", equipmentId)
                         startActivity(intent)
                         finish()
                     }

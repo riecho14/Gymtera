@@ -24,11 +24,15 @@ import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class AdminAttendanceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminAttendanceBinding
     private var completeAttendanceList = mutableListOf<UserData>()
+    private val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
     val historyAdapter = AdminHistoryAdapter()
 
     companion object {
@@ -143,7 +147,7 @@ class AdminAttendanceActivity : AppCompatActivity() {
             for ((index, userData) in dataList.withIndex()) {
                 val row = sheet.createRow(index + 1)
                 row.createCell(0).setCellValue(userData.fullname ?: "")
-                row.createCell(1).setCellValue(userData.date ?: "")
+                row.createCell(1).setCellValue(parseDate(userData.date)?.let { dateFormat.format(it) })
                 row.createCell(2).setCellValue(userData.time ?: "")
             }
 
@@ -199,7 +203,7 @@ class AdminAttendanceActivity : AppCompatActivity() {
                         }
                     }
                 }
-                val sortedAttendanceList = completeAttendanceList.sortedByDescending { it.date }
+                val sortedAttendanceList = completeAttendanceList.sortedByDescending { parseDate(it.date) }
                 callback(sortedAttendanceList)
             }
 
@@ -207,6 +211,14 @@ class AdminAttendanceActivity : AppCompatActivity() {
                 // Handle error
             }
         })
+    }
+
+    private fun parseDate(dateString: String?): Date? {
+        return try {
+            dateFormat.parse(dateString ?: "")
+        } catch (e: Exception) {
+            null
+        }
     }
 
     private fun search(query: String) {
