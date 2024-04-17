@@ -19,6 +19,7 @@ import com.tugasakhir.gymtera.admin.AdminHomeActivity
 import com.tugasakhir.gymtera.data.AdminHistoryAdapter
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityAdminAttendanceBinding
+import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
@@ -131,25 +132,39 @@ class AdminAttendanceActivity : AppCompatActivity() {
     private fun exportDataToExcel() {
         val excelFileName = "data_presensi.xlsx"
         val excelSheetName = "Data Presensi"
-
         val workbook = XSSFWorkbook()
-        val sheet = workbook.createSheet(excelSheetName)
 
-        // Headers
-        val headerRow = sheet.createRow(0)
+        // Sheet for raw data
+        val rawDataSheet = workbook.createSheet(excelSheetName)
+
+        // Headers for raw data
+        val headerRow = rawDataSheet.createRow(0)
         headerRow.createCell(0).setCellValue("Nama")
         headerRow.createCell(1).setCellValue("Tanggal")
         headerRow.createCell(2).setCellValue("Waktu")
 
-        // Fetch data
+        // Fetch and export raw data
         fetchAttendanceData { dataList ->
-            // Data
-            for ((index, userData) in dataList.withIndex()) {
-                val row = sheet.createRow(index + 1)
+            dataList.forEachIndexed { index, userData ->
+                val row = rawDataSheet.createRow(index + 1)
                 row.createCell(0).setCellValue(userData.fullname ?: "")
-                row.createCell(1).setCellValue(parseDate(userData.date)?.let { dateFormat.format(it) })
+                row.createCell(1)
+                    .setCellValue(parseDate(userData.date)?.let { dateFormat.format(it) })
                 row.createCell(2).setCellValue(userData.time ?: "")
             }
+
+            // Sheet for statistics
+            val statsSheet = workbook.createSheet("Statistics")
+
+            // Calculate statistics
+            val dailyStats = calculateDailyStats(dataList)
+            val monthlyStats = calculateMonthlyStats(dataList)
+            val yearlyStats = calculateYearlyStats(dataList)
+
+            // Export statistics
+            exportStatsToSheet(statsSheet, dailyStats, "Daily Attendance")
+            exportStatsToSheet(statsSheet, monthlyStats, "Monthly Attendance")
+            exportStatsToSheet(statsSheet, yearlyStats, "Yearly Attendance")
 
             // Save the workbook
             try {
@@ -182,6 +197,64 @@ class AdminAttendanceActivity : AppCompatActivity() {
         }
     }
 
+    private fun calculateDailyStats(dataList: List<UserData>): Map<String, Int> {
+        val dailyStats = mutableMapOf<String, Int>()
+        for (userData in dataList) {
+            val date = parseDate(userData.date)?.let { dateFormat.format(it) }
+            date?.let {
+                dailyStats[date] = dailyStats.getOrDefault(date, 0) + 1
+            }
+        }
+        return dailyStats
+    }
+
+    private fun calculateMonthlyStats(dataList: List<UserData>): Map<String, Int> {
+        val monthlyStats = mutableMapOf<String, Int>()
+        for (userData in dataList) {
+            val date = parseDate(userData.date)
+            val month = date?.let { SimpleDateFormat("MM-yyyy", Locale.getDefault()).format(it) }
+            month?.let {
+                monthlyStats[month] = monthlyStats.getOrDefault(month, 0) + 1
+            }
+        }
+        return monthlyStats
+    }
+
+    private fun calculateYearlyStats(dataList: List<UserData>): Map<String, Int> {
+        val yearlyStats = mutableMapOf<String, Int>()
+        for (userData in dataList) {
+            val date = parseDate(userData.date)
+            val year = date?.let { SimpleDateFormat("yyyy", Locale.getDefault()).format(it) }
+            year?.let {
+                yearlyStats[year] = yearlyStats.getOrDefault(year, 0) + 1
+            }
+        }
+        return yearlyStats
+    }
+
+    private fun exportStatsToSheet(sheet: XSSFSheet, stats: Map<String, Int>, title: String) {
+        var nextRowNum = sheet.lastRowNum + 1
+
+        if (title != "Daily Attendance") {
+            val emptyRowAboveTitle = sheet.createRow(nextRowNum++)
+        }
+
+        val titleRow = sheet.createRow(nextRowNum++)
+        titleRow.createCell(0).setCellValue(title)
+
+        val headerRow = sheet.createRow(nextRowNum++)
+        headerRow.createCell(0).setCellValue("Tanggal")
+        headerRow.createCell(1).setCellValue("Jumlah Pengunjung")
+
+        stats.entries.forEach { (date, count) ->
+            val dataRow = sheet.createRow(nextRowNum++)
+            dataRow.createCell(0).setCellValue(date)
+            dataRow.createCell(1).setCellValue(count.toDouble())
+        }
+
+        val emptyRowAfterSection = sheet.createRow(nextRowNum++)
+    }
+
     private fun fetchAttendanceData(callback: (List<UserData>) -> Unit) {
         val database = FirebaseDatabase.getInstance(getString(R.string.ref_url))
         val usersRef = database.getReference("Users")
@@ -203,7 +276,8 @@ class AdminAttendanceActivity : AppCompatActivity() {
                         }
                     }
                 }
-                val sortedAttendanceList = completeAttendanceList.sortedByDescending { parseDate(it.date) }
+                val sortedAttendanceList =
+                    completeAttendanceList.sortedByDescending { parseDate(it.date) }
                 callback(sortedAttendanceList)
             }
 
