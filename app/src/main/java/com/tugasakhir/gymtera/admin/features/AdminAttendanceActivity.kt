@@ -236,7 +236,7 @@ class AdminAttendanceActivity : AppCompatActivity() {
         var nextRowNum = sheet.lastRowNum + 1
 
         if (title != "Daily Attendance") {
-            val emptyRowAboveTitle = sheet.createRow(nextRowNum++)
+            sheet.createRow(nextRowNum++)
         }
 
         val titleRow = sheet.createRow(nextRowNum++)
@@ -252,7 +252,7 @@ class AdminAttendanceActivity : AppCompatActivity() {
             dataRow.createCell(1).setCellValue(count.toDouble())
         }
 
-        val emptyRowAfterSection = sheet.createRow(nextRowNum++)
+        sheet.createRow(nextRowNum++)
     }
 
     private fun fetchAttendanceData(callback: (List<UserData>) -> Unit) {
