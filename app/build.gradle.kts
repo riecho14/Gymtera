@@ -56,6 +56,7 @@ dependencies {
     implementation("org.apache.poi:poi:5.2.2")
     implementation("org.apache.poi:poi-ooxml:5.2.2")
     implementation("com.github.AppIntro:AppIntro:6.3.1")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

@@ -72,6 +72,12 @@ class AdminAttendanceActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.statistics -> {
+                    val intent = Intent(this, StatisticsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
                 else -> false
             }
         }
@@ -210,11 +216,16 @@ class AdminAttendanceActivity : AppCompatActivity() {
 
     private fun calculateMonthlyStats(dataList: List<UserData>): Map<String, Int> {
         val monthlyStats = mutableMapOf<String, Int>()
+        val uniqueMonths = HashSet<String>()
+
         for (userData in dataList) {
             val date = parseDate(userData.date)
             val month = date?.let { SimpleDateFormat("MM-yyyy", Locale.getDefault()).format(it) }
             month?.let {
-                monthlyStats[month] = monthlyStats.getOrDefault(month, 0) + 1
+                if (!uniqueMonths.contains(month)) {
+                    uniqueMonths.add(month)
+                    monthlyStats[month] = monthlyStats.getOrDefault(month, 0) + 1
+                }
             }
         }
         return monthlyStats
@@ -222,11 +233,16 @@ class AdminAttendanceActivity : AppCompatActivity() {
 
     private fun calculateYearlyStats(dataList: List<UserData>): Map<String, Int> {
         val yearlyStats = mutableMapOf<String, Int>()
+        val uniqueYears = HashSet<String>()
+
         for (userData in dataList) {
             val date = parseDate(userData.date)
             val year = date?.let { SimpleDateFormat("yyyy", Locale.getDefault()).format(it) }
             year?.let {
-                yearlyStats[year] = yearlyStats.getOrDefault(year, 0) + 1
+                if (!uniqueYears.contains(year)) {
+                    uniqueYears.add(year)
+                    yearlyStats[year] = yearlyStats.getOrDefault(year, 0) + 1
+                }
             }
         }
         return yearlyStats

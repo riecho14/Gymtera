@@ -62,4 +62,6 @@
     <string name="reset_password">Reset Password</string>
     <string name="about">About</string>
     <string name="about_desc">Gym ITERA merupakan sarana yang tersedia bagi seluruh civitas akademika ITERA, termasuk dosen, tenaga kependidikan, dan mahasiswa, yang dapat digunakan tanpa dipungut biaya, aplikasi ini memberikan panduan fitness yang dikembangkan untuk menyediakan petunjuk yang jelas dan terperinci untuk setiap latihan, baik untuk pemula maupun pengguna tingkat lanjut.</string>
+    <string name="jumlah_pengunjung_perbulan">Jumlah Pengunjung Perbulan</string>
+    <string name="jumlah_pengunjung_pertahun">Jumlah Pengunjung Pertahun</string>
 </resources>

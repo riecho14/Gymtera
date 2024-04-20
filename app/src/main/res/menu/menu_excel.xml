@@ -7,4 +7,9 @@
         tools:ignore="HardcodedText">
 
     </item>
+
+    <item
+        android:id="@+id/statistics"
+        android:title="Statistics"
+        tools:ignore="HardcodedText" />
 </menu>
