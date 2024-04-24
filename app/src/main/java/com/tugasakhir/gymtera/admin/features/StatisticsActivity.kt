@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.tugasakhir.gymtera.R
-import com.tugasakhir.gymtera.admin.AdminHomeActivity
 import com.tugasakhir.gymtera.data.UserData
 import com.tugasakhir.gymtera.databinding.ActivityStatisticsBinding
 import java.text.SimpleDateFormat
