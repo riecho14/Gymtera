@@ -38,7 +38,7 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val targetLatitude = -5.359790
     private val targetLongitude = 105.315717
-    private val radius = 999999999999999999
+    private val radius = 10.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
