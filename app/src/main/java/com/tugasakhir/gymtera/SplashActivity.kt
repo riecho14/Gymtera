@@ -1,82 +1,33 @@
 package com.tugasakhir.gymtera
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.tugasakhir.gymtera.ui.theme.GymteraTheme
+import android.os.Handler
+import android.view.WindowManager
+import com.tugasakhir.gymtera.databinding.ActivitySplashBinding
 import com.tugasakhir.gymtera.user.LoginActivity
-import kotlinx.coroutines.delay
 
-class JetpackActivity : ComponentActivity() {
+@Suppress("DEPRECATION")
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            GymteraTheme {
-                SplashScreen {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                }
-            }
-        }
-    }
-}
-
-val CustomFont = FontFamily(Font(R.font.ft_semibold))
-
-@Composable
-fun SplashScreen(onTimeout: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_logo),
-            contentDescription = "App Logo",
-            modifier = Modifier.size(132.dp)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        Text(
-            text = "GYMTERA",
-            color = Color.Black,
-            fontFamily = CustomFont,
-            fontSize = 26.sp,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(all = 62.dp)
-        )
-    }
-    LaunchedEffect(key1 = true) {
-        delay(2000)
-        onTimeout()
-    }
-}
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-@Preview(showBackground = true, showSystemUi = false)
-@Composable
-fun SplashScreenPreview() {
-    GymteraTheme {
-        SplashScreen {}
+        Handler().postDelayed({
+            val i = Intent(
+                this@SplashActivity, LoginActivity::class.java
+            )
+            startActivity(i)
+            finish()
+        }, 2000)
     }
 }

@@ -24,17 +24,6 @@
         android:theme="@style/Theme.Gymtera"
         tools:targetApi="31">
         <activity
-            android:name=".JetpackActivity"
-            android:exported="true"
-            android:label="@string/title_activity_jetpack"
-            android:theme="@style/Theme.Gymtera">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".admin.features.StatisticsActivity"
             android:exported="false" />
         <activity
@@ -109,6 +98,15 @@
         <activity
             android:name=".user.RegisterActivity"
             android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".user.LoginActivity"
             android:exported="false" />
