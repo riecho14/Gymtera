@@ -65,4 +65,5 @@
     <string name="jumlah_pengunjung_perbulan">Jumlah Pengunjung Perbulan</string>
     <string name="jumlah_pengunjung_pertahun">Jumlah Pengunjung Pertahun</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_jetpack">JetpackActivity</string>
 </resources>

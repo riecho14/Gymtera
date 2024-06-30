@@ -24,6 +24,11 @@
         android:theme="@style/Theme.Gymtera"
         tools:targetApi="31">
         <activity
+            android:name=".JetpackActivity"
+            android:exported="false"
+            android:label="@string/title_activity_jetpack"
+            android:theme="@style/Theme.Gymtera" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/title_activity_splash"
