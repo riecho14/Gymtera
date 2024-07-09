@@ -24,7 +24,7 @@
         android:theme="@style/Theme.Gymtera"
         tools:targetApi="31">
         <activity
-            android:name=".JetpackActivity"
+            android:name=".user.features.JetpackActivity"
             android:exported="false"
             android:label="@string/title_activity_jetpack"
             android:theme="@style/Theme.Gymtera" />

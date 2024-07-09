@@ -24,7 +24,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -46,11 +45,24 @@ import kotlinx.coroutines.launch
 class IntroActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            GymteraTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    IntroScreen(modifier = Modifier.padding(innerPadding), context = this)
+
+        val sharedPreferences = getSharedPreferences("intro_prefs", Context.MODE_PRIVATE)
+        val isFirstTime = sharedPreferences.getBoolean("is_first_time", false)
+
+        if (isFirstTime) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        } else {
+            enableEdgeToEdge()
+            setContent {
+                GymteraTheme {
+                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                        IntroScreen(modifier = Modifier.padding(innerPadding), onIntroFinished = {
+                            sharedPreferences.edit().putBoolean("is_first_time", true).apply()
+                            startActivity(Intent(this, HomeActivity::class.java))
+                            finish()
+                        })
+                    }
                 }
             }
         }
@@ -100,7 +112,7 @@ fun IntroPage(
 
 @Composable
 @OptIn(ExperimentalPagerApi::class)
-fun IntroScreen(modifier: Modifier = Modifier, context: Context) {
+fun IntroScreen(modifier: Modifier = Modifier, onIntroFinished: () -> Unit) {
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -195,9 +207,7 @@ fun IntroScreen(modifier: Modifier = Modifier, context: Context) {
                 ), modifier = Modifier
                     .padding(bottom = 2.dp)
                     .clickable {
-                        val intent = Intent(context, HomeActivity::class.java)
-                        context.startActivity(intent)
-                        (context as? ComponentActivity)?.finish()
+                        onIntroFinished()
                     })
             }
         }
@@ -208,6 +218,6 @@ fun IntroScreen(modifier: Modifier = Modifier, context: Context) {
 @Composable
 fun IntroScreenPreview() {
     GymteraTheme {
-        IntroScreen(context = LocalContext.current)
+        IntroScreen(onIntroFinished = {})
     }
 }
